@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "on": {
+    "aggrid-columnselection": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/on",
+            "outputPath": "dist/aggrid-columnselection",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "on:build:production"
+              "buildTarget": "aggrid-columnselection:build:production"
             },
             "development": {
-              "buildTarget": "on:build:development"
+              "buildTarget": "aggrid-columnselection:build:development"
             }
           },
           "defaultConfiguration": "development",
