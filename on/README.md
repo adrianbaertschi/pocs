@@ -14,3 +14,5 @@ This demo shows how to select/highlight a full AG Grid column by clicking any ce
 npm install
 npm start
 ```
+
+The development server runs on `http://localhost:4300`.

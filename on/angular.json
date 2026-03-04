@@ -69,7 +69,10 @@
               "buildTarget": "on:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4300
+          }
         }
       }
     }
