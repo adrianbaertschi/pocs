@@ -13,6 +13,18 @@
     [rowData]="rowData()"
     [animateRows]="true"
     [suppressRowClickSelection]="true"
+    (gridReady)="onGridReady($event)"
     (cellClicked)="onCellClicked($event)">
   </ag-grid-angular>
+
+  <section class="selected-column-info">
+    @if (selectedColumnId()) {
+      <p>
+        Selected column data (<strong>{{ selectedColumnName() }}</strong>):
+        {{ selectedColumnValues().join(', ') }}
+      </p>
+    } @else {
+      <p>Select any column by clicking a cell to see the column values.</p>
+    }
+  </section>
 </main>

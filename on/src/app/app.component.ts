@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { CellClickedEvent, ColDef } from 'ag-grid-community';
+import { CellClickedEvent, ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 
 interface AthleteRow {
   athlete: string;
@@ -19,8 +19,28 @@ interface AthleteRow {
 })
 export class AppComponent {
   private extraColumnsCount = 0;
+  private gridApi: GridApi<AthleteRow> | null = null;
 
   readonly selectedColumnId = signal<string | null>(null);
+
+  readonly selectedColumnName = computed(() => {
+    const selectedId = this.selectedColumnId();
+    if (!selectedId) {
+      return null;
+    }
+
+    const matchingColumn = this.columnDefs().find((column) => column.field === selectedId);
+    return matchingColumn?.headerName ?? selectedId;
+  });
+
+  readonly selectedColumnValues = computed(() => {
+    const selectedId = this.selectedColumnId();
+    if (!selectedId) {
+      return [];
+    }
+
+    return this.rowData().map((row) => row[selectedId]);
+  });
 
   columnDefs = signal<ColDef<AthleteRow>[]>([
     { field: 'athlete', headerName: 'Athlete' },
@@ -44,8 +64,13 @@ export class AppComponent {
     { athlete: 'Katie Ledecky', country: 'USA', sport: 'Swimming', age: 19 }
   ]);
 
+  onGridReady(event: GridReadyEvent<AthleteRow>): void {
+    this.gridApi = event.api;
+  }
+
   onCellClicked(event: CellClickedEvent<AthleteRow>): void {
     this.selectedColumnId.set(event.column.getColId());
+    this.gridApi?.refreshCells({ force: true });
   }
 
   addColumn(): void {

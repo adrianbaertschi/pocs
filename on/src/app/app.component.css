@@ -23,6 +23,14 @@
   font-weight: 600;
 }
 
+.selected-column-info {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+}
+
 :host ::ng-deep .selected-column-cell {
-  background-color: #dbeafe;
+  background-color: #bfdbfe;
 }
