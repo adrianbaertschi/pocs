@@ -1,0 +1,30 @@
+<main class="container">
+  <h1>AG Grid Column Selection Demo</h1>
+  <p>Click any cell to highlight/select the full column.</p>
+
+  <button type="button" class="add-column-btn" (click)="addColumn()">
+    Add Column
+  </button>
+
+  <ag-grid-angular
+    class="ag-theme-quartz grid"
+    [columnDefs]="columnDefs()"
+    [defaultColDef]="defaultColDef"
+    [rowData]="rowData()"
+    [animateRows]="true"
+    [suppressRowClickSelection]="true"
+    (gridReady)="onGridReady($event)"
+    (cellClicked)="onCellClicked($event)">
+  </ag-grid-angular>
+
+  <section class="selected-column-info">
+    @if (selectedColumnId()) {
+      <p>
+        Selected column data (<strong>{{ selectedColumnName() }}</strong>):
+        {{ selectedColumnValues().join(', ') }}
+      </p>
+    } @else {
+      <p>Select any column by clicking a cell to see the column values.</p>
+    }
+  </section>
+</main>
